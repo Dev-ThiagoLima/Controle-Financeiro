@@ -15,6 +15,8 @@ const dummytransactions = [
     {id:4, name: 'violão', amount: 150}
 ]
 
+
+
 const addTransactionIntoDOM = transaction => {
     const operator = transaction.amount < 0 ? '-' : '+'
     const amountWithoutOperator =  Math.abs(transaction.amount)
@@ -23,7 +25,11 @@ const addTransactionIntoDOM = transaction => {
 
     li.classList.add(CSSClass)
     li.innerHTML = `
-        ${transaction.name} <span>${operator} R$ ${amountWithoutOperator}</span><button class="delete-btn">x</button>
+        ${transaction.name} 
+        <span>${operator} R$ ${amountWithoutOperator}</span>
+        <button class="delete-btn" onClick="removeTrasaction(${transaction.id})">
+            x
+        </button>
     `
    transactionUl.append(li)
 
@@ -50,11 +56,14 @@ const updateBalanceValues = constValue = () => {
 }
 
 const init = () => {
+    transactionUl.innerHTML = ''
     dummytransactions.forEach(addTransactionIntoDOM)
     updateBalanceValues()
 }
 
 init()
+
+const generateID = () => Math.round(Math.random() * 1000)
 
 form.addEventListener('submit', event => {
     event.preventDefault()
@@ -67,6 +76,17 @@ form.addEventListener('submit', event => {
         return
     }
 
-    const transaction = {id:1, name:transactionName, amount: transactionAmount }
+    const transaction = {
+        id:generateID(), 
+        name:transactionName, 
+        amount: Number(transactionAmount) 
+    }
+
+    dummytransactions.push(transaction)
+    init()
+
+    inputTransactionName.value = ''
+    inputTransactionAmount.value = ''
+
 
 })
