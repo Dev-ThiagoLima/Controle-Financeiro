@@ -17,8 +17,10 @@ const addTransactionIntoDOM = transaction => {
     li.innerHTML = `
         ${transaction.name} <span>${operator} R$ ${amountWithoutOperator}</span><button class="delete-btn">x</button>
     `
-   transactionUl.prepend(li)
+   transactionUl.append(li)
 
 }
 
-addTransactionIntoDOM(dummytransactions[0])
+const init = () => {
+    dummytransactions.forEach(addTransactionIntoDOM)
+}
