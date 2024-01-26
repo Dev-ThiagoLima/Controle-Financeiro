@@ -7,6 +7,7 @@ const inputTransactionName = document.querySelector('#text')
 const inputTransactionAmount = document.querySelector('#amount')
 
 
+
 const dummytransactions = [
     {id:1, name: 'Bolo de Brigadeiro', amount: -20},
     {id:2, name: 'salário', amount: 300 },
@@ -57,4 +58,15 @@ init()
 
 form.addEventListener('submit', event => {
     event.preventDefault()
+
+    const transactionName = inputTransactionName.value.trim()
+    const transactionAmount = inputTransactionAmount.value.trim()
+
+    if ( transactionName === '' || transactionAmount === ''){
+        alert('Por favor, preencha tanto o nome quanto o valor da transação')
+        return
+    }
+
+    const transaction = {id:1, name:transactionName, amount: transactionAmount }
+
 })
