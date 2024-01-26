@@ -2,6 +2,8 @@ const transactionUl = document.querySelector('#transactions')
 const incomeDisplay = document.querySelector('#money-plus')
 const expenseDisplay = document.querySelector('#money-minus')
 const balanceDisplay = document.querySelector('#balance')
+const form = document.querySelector('#form')
+const form = document.querySelector('#form')
 
 
 const dummytransactions = [
@@ -51,3 +53,7 @@ const init = () => {
 }
 
 init()
+
+form.addEventListener('submit', event => {
+    event.preventDefault()
+})
