@@ -7,17 +7,15 @@ const inputTransactionName = document.querySelector('#text')
 const inputTransactionAmount = document.querySelector('#amount')
 
 
-
-let dummytransactions = [
-    {id:1, name: 'Bolo de Brigadeiro', amount: -20},
-    {id:2, name: 'salário', amount: 300 },
-    {id:3, name: 'Torta de frango', amount: -10},
-    {id:4, name: 'violão', amount: 150}
-]
+const localStorageTransactions = JSON.parse (localStorage
+    .getItem('transactions'))
+let transactions = localStorage
+    .getItem('transactions') !== null ? localStorageTransactions : []
 
 const removeTransaction = ID => {
-    dummytransactions = dummytransactions.filter(transaction => transaction.id !== ID )
-    console.log(dummytransactions)
+    transactions = transactions.filter(transaction => 
+        transaction.id !== ID )
+    init()
 }
 
 const addTransactionIntoDOM = transaction => {
@@ -30,7 +28,7 @@ const addTransactionIntoDOM = transaction => {
     li.innerHTML = `
         ${transaction.name} 
         <span>${operator} R$ ${amountWithoutOperator}</span>
-        <button class="delete-btn" onClick="removeTrasaction(${transaction.id})">
+        <button class="delete-btn" onClick="removeTransaction(${transaction.id})">
             x
         </button>
     `
@@ -39,7 +37,7 @@ const addTransactionIntoDOM = transaction => {
 }
 
 const updateBalanceValues = constValue = () => {
-    const transactionsAmounts = dummytransactions
+    const transactionsAmounts = transactions
         .map(transaction => transaction.amount)
     const total = transactionsAmounts
         .reduce((accumulator, transaction) => accumulator + transaction, 0)
@@ -60,7 +58,7 @@ const updateBalanceValues = constValue = () => {
 
 const init = () => {
     transactionUl.innerHTML = ''
-    dummytransactions.forEach(addTransactionIntoDOM)
+    transactions.forEach(addTransactionIntoDOM)
     updateBalanceValues()
 }
 
@@ -85,7 +83,7 @@ form.addEventListener('submit', event => {
         amount: Number(transactionAmount) 
     }
 
-    dummytransactions.push(transaction)
+    transactions.push(transaction)
     init()
 
     inputTransactionName.value = ''
