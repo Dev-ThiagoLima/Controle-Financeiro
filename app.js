@@ -8,14 +8,17 @@ const inputTransactionAmount = document.querySelector('#amount')
 
 
 
-const dummytransactions = [
+let dummytransactions = [
     {id:1, name: 'Bolo de Brigadeiro', amount: -20},
     {id:2, name: 'salário', amount: 300 },
     {id:3, name: 'Torta de frango', amount: -10},
     {id:4, name: 'violão', amount: 150}
 ]
 
-
+const removeTransaction = ID => {
+    dummytransactions = dummytransactions.filter(transaction => transaction.id !== ID )
+    console.log(dummytransactions)
+}
 
 const addTransactionIntoDOM = transaction => {
     const operator = transaction.amount < 0 ? '-' : '+'
