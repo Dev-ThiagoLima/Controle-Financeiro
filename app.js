@@ -7,10 +7,10 @@ const inputTransactionName = document.querySelector('#text')
 const inputTransactionAmount = document.querySelector('#amount')
 
 
-const localStorageTransactions = JSON.parse (localStorage
+const localStorageTransactions = JSON.parse(localStorage
     .getItem('transactions'))
 let transactions = localStorage
-    .getItem('transactions') !== null ? localStorageTransactions : []
+    .getItem('transactions') !== null ? localStorageTransactions : [ ]
 
 const removeTransaction = ID => {
     transactions = transactions.filter(transaction => 
@@ -20,8 +20,8 @@ const removeTransaction = ID => {
 
 const addTransactionIntoDOM = transaction => {
     const operator = transaction.amount < 0 ? '-' : '+'
-    const amountWithoutOperator =  Math.abs(transaction.amount)
     const CSSClass = transaction.amount < 0 ? 'minus' : 'plus'
+    const amountWithoutOperator =  Math.abs(transaction.amount)
     const li = document.createElement('li')
 
     li.classList.add(CSSClass)
